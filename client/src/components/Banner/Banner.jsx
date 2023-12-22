@@ -9,7 +9,7 @@ const Banner = () => {
                 <div>
                     <h1 className="w-full text-2xl lg:text-5xl font-bold font-montserrat">Next Task Elvate Your Productivity</h1>
                     <p className="py-3 md:py-6 font-opensans">Effortless task management for teams, bringing clarity and efficiency to your projects.</p>
-                    <Link to="/login" className="btn text-white btn-primary bg-orange-600 border-none font-opensans">Let&rsquo;s Explore</Link>
+                    <Link to="/login" className="btn hover:bg-orange-500 text-white btn-primary bg-orange-600 border-none font-opensans">Let&rsquo;s Explore</Link>
                 </div>
             </div>
         </div>
