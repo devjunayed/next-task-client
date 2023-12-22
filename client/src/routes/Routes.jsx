@@ -3,6 +3,8 @@ import Home from "../pages/Home/Home";
 import User from "../layout/User";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import LoggedUser from "../layout/LoggedUser";
+import Dashboard from "../pages/Dashboard/Dashboard";
 
 
 const router = createBrowserRouter([
@@ -26,7 +28,13 @@ const router = createBrowserRouter([
     },
     {
       path: "dashboard",
-      element: <div>About</div>,
+      element: <LoggedUser />,
+      children: [
+        {
+          path: "/dashboard",
+          element: <Dashboard />
+        }
+      ]
     },
   ]);
 
