@@ -3,7 +3,7 @@ import bannerImg from '../../assets/banner.svg';
 
 const Banner = () => {
     return (
-        <div className="hero min-h-[85vh] md:min-h-screen bg-base-100">
+        <div className="hero min-h-[85vh] md:min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <img src={bannerImg} className="w-2/3 md:max-w-lg rounded-lg" />
                 <div>
