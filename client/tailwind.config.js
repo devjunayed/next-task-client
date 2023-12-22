@@ -9,6 +9,8 @@ export default {
     extend: {},
     fontFamily: {
       advent: ['Advent Pro', 'sans-serif'],
+      montserrat: ['Montserrat', 'sans-serif'],
+      opensans: ['Open Sans', 'sans-serif'],
     },
   },
   plugins: [require("daisyui")],
