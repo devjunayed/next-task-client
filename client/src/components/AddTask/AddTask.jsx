@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import Modal from 'react-modal';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useForm } from 'react-hook-form';
+import useAxios from "../../hooks/useAxios";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthProviders";
+import { useQuery } from "@tanstack/react-query";
+
 
 
 const AddTask = () => {
+    const { user } = useContext(AuthContext);
     const [modalIsOpen, setIsOpen] = useState(false);
+    const publicAxios = useAxios();
+    const { refetch } = useQuery({
+        queryKey: [user.uid, "todoTask"]
+    });
 
     let subtitle;
     const {
@@ -17,9 +27,26 @@ const AddTask = () => {
 
 
     const onSubmit = data => {
-        console.log(data);
-        reset();
-        closeModal();
+        data.userId = user.uid;
+        publicAxios.post("/create-task", data)
+            .then((res) => {
+                console.log(res);
+                if (res.data.acknowledged) {
+
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Your task has been saved",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    refetch();
+                    reset();
+                    closeModal();
+                }
+            })
+            .catch(err => console.log(err));
+
     };
     function openModal() {
         setIsOpen(true);
@@ -71,7 +98,7 @@ const AddTask = () => {
                         <label className="label">
                             <span className="label-text">Deadline</span>
                         </label>
-                        <input {...register("date")} type="date" placeholder="Enter deadline" className="w-full input input-bordered" required />
+                        <input {...register("deadLine")} type="date" placeholder="Enter deadline" className="w-full input input-bordered" required />
                     </div>
                     <div className="form-control">
                         <label className="label">

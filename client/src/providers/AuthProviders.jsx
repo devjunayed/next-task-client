@@ -48,7 +48,7 @@ const AuthProviders = ({children}) => {
             unSubscribe();
         }
     }, [auth]);
-
+    console.log(user);
     const values = {
         auth,
         loading,

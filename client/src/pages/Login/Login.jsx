@@ -34,7 +34,7 @@ const Login = () => {
             if(err.code === "auth/invalid-credential"){
                 Swal.fire({
                     position: "center",
-                    icon: "success",
+                    icon: "error",
                     title: "Invalid Credentials!",
                     showConfirmButton: false,
                     timer: 1500

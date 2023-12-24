@@ -24,11 +24,20 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     const nextTaskDb =  client.db("nextTask");
+    const todoTask = nextTaskDb.collection("todoTask");
     const onGoingTask = nextTaskDb.collection("onGoingTask");
 
-    app.post("/next-task", async(req, res) => {
+    app.post("/create-task", async(req, res) => {
         const data = req.body;
-        const result = await onGoingTask.insertOne(data);
+        const result = await todoTask.insertOne(data);
+        res.send(result);
+    })
+
+    app.get("/get-todo/:id", async(req, res) => {
+      const userId = req.params.id;
+      const result = await todoTask.find({userId}).toArray();
+      res.send(result);
+      console.log(result);
     })
 
 
