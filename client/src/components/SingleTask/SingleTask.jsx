@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const SingleTask = ({ title, description, deadLine, priority }) => {
     return (
-        <div className="border-4 p-4 hover:cursor-move">
+        <div className="border-4 p-4 hover:cursor-move bg-white">
             <div className="flex justify-end">
                 <button className="btn text-white text-xl bg-green-600"><FaRegEdit /></button>
                 <button className="btn text-white text-xl bg-red-600"><MdDelete /></button>

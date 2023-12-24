@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -26,19 +26,79 @@ async function run() {
     const nextTaskDb =  client.db("nextTask");
     const todoTask = nextTaskDb.collection("todoTask");
     const onGoingTask = nextTaskDb.collection("onGoingTask");
+    const completedTask = nextTaskDb.collection("completedTAsk");
 
     app.post("/create-task", async(req, res) => {
         const data = req.body;
         const result = await todoTask.insertOne(data);
         res.send(result);
     })
+    app.post("/todo", async(req, res) => {
+        const data = req.body;
+        data._id = new ObjectId(data._id);
+        const result = await todoTask.insertOne(data);
+        res.send(result);
+    })
 
-    app.get("/get-todo/:id", async(req, res) => {
+    app.get("/todo/:id", async(req, res) => {
       const userId = req.params.id;
       const result = await todoTask.find({userId}).toArray();
-      res.send(result);
       console.log(result);
+      res.send(result);
     })
+
+    app.delete("/todo/:id", async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)};
+      const result = await todoTask.deleteOne(query);
+      res.send(result);
+    })
+
+    
+  
+
+    app.post("/ongoing", async(req, res) => {
+      const data = req.body;
+      data._id = new ObjectId(data._id);
+      const result = await onGoingTask.insertOne(data);
+      res.send(result);
+
+    })
+
+    app.get("/ongoing/:id", async(req, res) => {
+      const userId = req.params.id;
+      const result = await onGoingTask.find({userId}).toArray();
+      res.send(result);
+    })
+
+    app.delete("/ongoing/:id", async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)};
+      const result = await onGoingTask.deleteOne(query);
+      res.send(result);
+    })
+
+    app.post("/completed", async(req, res) => {
+      const data = req.body;
+      data._id = new ObjectId(data._id);
+      const result = await completedTask.insertOne(data);
+      res.send(result);
+    })
+
+    app.get("/completed/:id", async(req, res) => {
+      const userId = req.params.id;
+      const result = await completedTask.find({userId}).toArray();
+      res.send(result);
+    })
+
+    app.delete("/completed/:id", async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)};
+      const result = await completedTask.deleteOne(query);
+      res.send(result);
+    })
+
+
 
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");

@@ -12,11 +12,18 @@ import { useQuery } from "@tanstack/react-query";
 
 const AddTask = () => {
     const { user } = useContext(AuthContext);
+    const userId = user.uid;
     const [modalIsOpen, setIsOpen] = useState(false);
     const publicAxios = useAxios();
-    const { refetch } = useQuery({
-        queryKey: [user.uid, "todoTask"]
-    });
+
+    const {  refetch: refetchTodoTask} = useQuery({
+        queryKey: [userId, "todoTask", undefined],
+        queryFn: async () => {
+          const res = await publicAxios.get(`/todo/${userId}`);
+          return res.data;
+        }
+      });
+    
 
     let subtitle;
     const {
@@ -40,7 +47,7 @@ const AddTask = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    refetch();
+                    refetchTodoTask();
                     reset();
                     closeModal();
                 }
