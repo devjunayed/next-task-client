@@ -7,7 +7,7 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: ["https://devjunayed-next-task.web.app", "https://devjunayed-next-task.web.app/dashboard", "http://localhost:5173"],
+    origin: ["https://devjunayed-next-task.firebaseapp.com", "https://devjunayed-next-task.web.app"],
     methods: '*'
   })
 );

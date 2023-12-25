@@ -1,11 +1,17 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
+
 const User = () => {
     const url = useLocation().pathname.split("/")[1];
-    console.log(url);
+    useEffect(() => {
+        AOS.init();
+      }, [])
     return (
-        <div>
+        <div className="overflow-x-hidden">
             {
                 (url === 'register' || url === 'login')
                 ||

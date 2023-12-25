@@ -33,7 +33,7 @@ const Header = () => {
           navigate("/");
     }
     return (
-        <div className="navbar bg-orange-600 ">
+        <div className="navbar bg-orange-600 " data-aos="fade-in">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn text-white btn-ghost lg:hidden">

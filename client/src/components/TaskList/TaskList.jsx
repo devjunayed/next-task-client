@@ -175,8 +175,8 @@ const TaskList = () => {
             <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
               {!isTodoTaskFetching && !isTodoTaskLoading &&
 
-                todoTask.map((todo) =>
-                  <div key={todo._id} draggable onDragStart={(e) => handleDragStart(e, todo)}>
+                todoTask.map((todo, index) =>
+                  <div key={todo._id} data-aos={index%2 ==0 ? "zoom-in": "zoom-out"} draggable onDragStart={(e) => handleDragStart(e, todo)}>
 
                     <SingleTaskTodo
                       refetch={refetchTodoTask}
@@ -204,8 +204,8 @@ const TaskList = () => {
             <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
               {!isOnGoingFetching && !isOnGoingLoading &&
 
-                onGoingTask.map((todo) =>
-                  <div key={todo._id} draggable onDragStart={(e) => handleDragStart(e, todo)}>
+                onGoingTask.map((todo, index) =>
+                  <div key={todo._id}  data-aos={index%2 ==0 ? "zoom-in": "zoom-out"} draggable onDragStart={(e) => handleDragStart(e, todo)}>
 
                     <SingleTaskOnGoing
                       refetch={refetchOnGoing}
@@ -233,8 +233,8 @@ const TaskList = () => {
             <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
               {!isCompletedFetching && !isCompletedLoading &&
 
-                completedTask.map((todo) =>
-                  <div key={todo._id} draggable onDragStart={(e) => handleDragStart(e, todo)}>
+                completedTask.map((todo, index) =>
+                  <div key={todo._id}  data-aos={index%2 ==0 ? "zoom-in": "zoom-out"} draggable onDragStart={(e) => handleDragStart(e, todo)}>
 
                     <SingleTaskCompleted
                       refetch={refetchOnGoing}

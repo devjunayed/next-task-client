@@ -9,7 +9,7 @@ const Login = () => {
     const {googleSignIn, emailSignIn} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state.from.pathname || "/";
+    const from = location?.state?.from?.pathname || "/";
 
     const {
         register,
