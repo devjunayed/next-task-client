@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from "../../providers/AuthProviders";
 
 
-const SingleTaskCompleted = ({ refetch, refetchOnGoing, userId, id, title, description, deadLine, priority }) => {
+const SingleTaskCompleted = ({ refetchComplete,  id, title, description, deadLine, priority }) => {
     const publicAxios = useAxios();
     const { user } = useContext(AuthContext);
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -28,49 +28,12 @@ const SingleTaskCompleted = ({ refetch, refetchOnGoing, userId, id, title, descr
                         showConfirmButton: false,
                         timer: 2500
                     });
-                    refetch();
+                    refetchComplete();
                 }
             })
     }
 
-    const handleStart = () => {
-
-        publicAxios.delete(`/todo/${id}`)
-            .then(res => {
-                console.log(res);
-                if (res.data.deletedCount >= 1) {
-
-                    const todoData = {
-                        _id: id,
-                        title,
-                        description,
-                        deadLine,
-                        priority,
-                        userId,
-                    }
-                    publicAxios.post("/ongoing", todoData)
-                        .then(res => {
-                            if (res.data.acknowledged) {
-                                Swal.fire({
-                                    position: "center",
-                                    icon: "success",
-                                    title: `Task moved to ongoing`,
-                                    showConfirmButton: false,
-                                    timer: 2500
-                                });
-                                refetch();
-                                refetchOnGoing();
-
-                            }
-                        }).catch(err => console.log(err));
-
-
-
-                }
-            }).catch(err => console.log(err));
-    }
-
-
+    
 
 
     let subtitle;
@@ -95,7 +58,7 @@ const SingleTaskCompleted = ({ refetch, refetchOnGoing, userId, id, title, descr
                         showConfirmButton: false,
                         timer: 2500
                     });
-                    refetch();
+                    refetchComplete();
                     reset();
                     closeModal();
                 }
@@ -146,7 +109,7 @@ const SingleTaskCompleted = ({ refetch, refetchOnGoing, userId, id, title, descr
                 </div>
             </div>
             <div className="mt-4">
-                <button onClick={handleStart} className=" btn uppercase hover:bg-green-800 w-full text-white bg-green-600" disabled={true}>Completed</button>
+                <button  className=" btn uppercase hover:bg-green-800 w-full text-white bg-green-600" disabled={true}>Completed</button>
             </div>
 
             {/* modal  */}
@@ -203,7 +166,7 @@ const SingleTaskCompleted = ({ refetch, refetchOnGoing, userId, id, title, descr
 };
 
 SingleTaskCompleted.propTypes = {
-    refetchOnGoing: PropTypes.func,
+    refetchComplete: PropTypes.func,
     refetch: PropTypes.func,
     id: PropTypes.string,
     userId: PropTypes.string,

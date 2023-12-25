@@ -10,7 +10,7 @@ const LoggedUser = () => {
         AOS.init();
       }, [])
     return (
-        <div className="overflow-x-hidden">
+        <div className="overflow-x-hidden overflow-y-hidden">
             <Header />
             <Outlet />
         </div>

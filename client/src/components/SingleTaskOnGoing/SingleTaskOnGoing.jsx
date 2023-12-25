@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from "../../providers/AuthProviders";
 
 
-const SingleTaskOnGoing = ({ refetch, refetchCompleted, userId, id, title, description, deadLine, priority }) => {
+const SingleTaskOnGoing = ({  refetchOnGoing, refetchComplete, userId, id, title, description, deadLine, priority }) => {
     const publicAxios = useAxios();
     const { user } = useContext(AuthContext);
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -28,7 +28,7 @@ const SingleTaskOnGoing = ({ refetch, refetchCompleted, userId, id, title, descr
                         showConfirmButton: false,
                         timer: 2500
                     });
-                    refetch();
+                    refetchOnGoing();
                 }
             })
     }
@@ -58,8 +58,8 @@ const SingleTaskOnGoing = ({ refetch, refetchCompleted, userId, id, title, descr
                                     showConfirmButton: false,
                                     timer: 2500
                                 });
-                                refetch();
-                                refetchCompleted();
+                                refetchOnGoing();
+                                refetchComplete();
 
                             }
                         }).catch(err => console.log(err));
@@ -95,7 +95,7 @@ const SingleTaskOnGoing = ({ refetch, refetchCompleted, userId, id, title, descr
                         showConfirmButton: false,
                         timer: 2500
                     });
-                    refetch();
+                    refetchOnGoing();
                     reset();
                     closeModal();
                 }
@@ -203,8 +203,8 @@ const SingleTaskOnGoing = ({ refetch, refetchCompleted, userId, id, title, descr
 };
 
 SingleTaskOnGoing.propTypes = {
-    refetchCompleted: PropTypes.func,
-    refetch: PropTypes.func,
+    refetchComplete: PropTypes.func,
+    refetchOnGoing: PropTypes.func,
     id: PropTypes.string,
     userId: PropTypes.string,
     title: PropTypes.string,

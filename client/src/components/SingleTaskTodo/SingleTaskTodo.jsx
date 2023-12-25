@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from "../../providers/AuthProviders";
 
 
-const SingleTaskTodo = ({ refetch, refetchOnGoing, userId, id, title, description, deadLine, priority }) => {
+const SingleTaskTodo = ({ refetchTodo, refetchOnGoing, userId, id, title, description, deadLine, priority }) => {
     const publicAxios = useAxios();
     const { user } = useContext(AuthContext);
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -28,7 +28,7 @@ const SingleTaskTodo = ({ refetch, refetchOnGoing, userId, id, title, descriptio
                         showConfirmButton: false,
                         timer: 2500
                     });
-                    refetch();
+                    refetchTodo();
                 }
             })
     }
@@ -58,7 +58,7 @@ const SingleTaskTodo = ({ refetch, refetchOnGoing, userId, id, title, descriptio
                                     showConfirmButton: false,
                                     timer: 2500
                                 });
-                                refetch();
+                                refetchTodo();
                                 refetchOnGoing();
 
                             }
@@ -95,7 +95,7 @@ const SingleTaskTodo = ({ refetch, refetchOnGoing, userId, id, title, descriptio
                         showConfirmButton: false,
                         timer: 2500
                     });
-                    refetch();
+                    refetchTodo();
                     reset();
                     closeModal();
                 }
@@ -204,7 +204,7 @@ const SingleTaskTodo = ({ refetch, refetchOnGoing, userId, id, title, descriptio
 
 SingleTaskTodo.propTypes = {
     refetchOnGoing: PropTypes.func,
-    refetch: PropTypes.func,
+    refetchTodo: PropTypes.func,
     id: PropTypes.string,
     userId: PropTypes.string,
     title: PropTypes.string,

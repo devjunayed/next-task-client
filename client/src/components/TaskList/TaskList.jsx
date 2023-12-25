@@ -126,15 +126,10 @@ const TaskList = () => {
         }
       }).catch(err => console.log(err));
 
-    // e.target.classList.remove("bg-red-600 text-white");
-    e.target.classList.remove("bg-red-600");
-    e.target.classList.remove("text-white");
-    console.log("dropped");
+
   }
   const handleDragOver = (e) => {
     e.preventDefault();
-    e.target.classList.add("bg-red-600");
-    e.target.classList.add("text-white");
   }
 
 
@@ -176,11 +171,12 @@ const TaskList = () => {
               {!isTodoTaskFetching && !isTodoTaskLoading &&
 
                 todoTask.map((todo, index) =>
-                  <div key={todo._id} data-aos={index%2 ==0 ? "zoom-in": "zoom-out"} draggable onDragStart={(e) => handleDragStart(e, todo)}>
+                  <div key={todo._id} data-aos={index % 2 == 0 ? "zoom-in" : "zoom-out"} draggable onDragStart={(e) => handleDragStart(e, todo)}>
 
                     <SingleTaskTodo
-                      refetch={refetchTodoTask}
+                      refetchTodo={refetchTodoTask}
                       refetchOnGoing={refetchOnGoing}
+                      refetchCompeleted={refetchCompeleted}
                       id={todo._id}
                       userId={todo.userId}
                       title={todo.title}
@@ -205,11 +201,13 @@ const TaskList = () => {
               {!isOnGoingFetching && !isOnGoingLoading &&
 
                 onGoingTask.map((todo, index) =>
-                  <div key={todo._id}  data-aos={index%2 ==0 ? "zoom-in": "zoom-out"} draggable onDragStart={(e) => handleDragStart(e, todo)}>
+                  <div key={todo._id} data-aos={index % 2 == 0 ? "zoom-in" : "zoom-out"} draggable onDragStart={(e) => handleDragStart(e, todo)}>
 
                     <SingleTaskOnGoing
-                      refetch={refetchOnGoing}
-                      refetchCompleted={refetchCompeleted}
+
+                      refetchTodo={refetchTodoTask}
+                      refetchOnGoing={refetchOnGoing}
+                      refetchComplete={refetchCompeleted}
                       id={todo._id}
                       userId={todo.userId}
                       title={todo.title}
@@ -234,11 +232,12 @@ const TaskList = () => {
               {!isCompletedFetching && !isCompletedLoading &&
 
                 completedTask.map((todo, index) =>
-                  <div key={todo._id}  data-aos={index%2 ==0 ? "zoom-in": "zoom-out"} draggable onDragStart={(e) => handleDragStart(e, todo)}>
+                  <div key={todo._id} data-aos={index % 2 == 0 ? "zoom-in" : "zoom-out"} draggable onDragStart={(e) => handleDragStart(e, todo)}>
 
                     <SingleTaskCompleted
-                      refetch={refetchOnGoing}
-                      refetchCompleted={refetchCompeleted}
+                      refetchTodo={refetchTodoTask}
+                      refetchOnGoing={refetchOnGoing}
+                      refetchComplete={refetchCompeleted}
                       id={todo._id}
                       userId={todo.userId}
                       title={todo.title}
