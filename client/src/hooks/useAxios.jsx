@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const publicAxios = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "https://next-task-livid.vercel.app",
 })
 const useAxios = () => {
     return publicAxios;

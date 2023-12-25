@@ -1,12 +1,14 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import "./TaskList.css";
-import SingleTask from '../SingleTask/SingleTask';
 import { useQuery } from '@tanstack/react-query';
 import useAxios from '../../hooks/useAxios';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProviders';
 import Swal from 'sweetalert2';
+import SingleTaskTodo from '../SingleTaskTodo/SingleTaskTodo';
+import SingleTaskOnGoing from '../SingleTaskOnGoing/SingleTaskOnGoing';
+import SingleTaskCompleted from '../SingleTaskCompleted/SingleTaskCompleted';
 
 
 const TaskList = () => {
@@ -43,7 +45,7 @@ const TaskList = () => {
     }
   });
 
-  
+
 
 
   const handleDragStart = (e, todo) => {
@@ -163,7 +165,7 @@ const TaskList = () => {
       </TabList>
 
       <TabPanel>
-         {
+        {
           !isTodoTaskFetching && !isTodoTaskLoading &&
             todoTask.length === 0 ?
             <div className='h-[70vh] flex items-center justify-center'>
@@ -176,7 +178,11 @@ const TaskList = () => {
                 todoTask.map((todo) =>
                   <div key={todo._id} draggable onDragStart={(e) => handleDragStart(e, todo)}>
 
-                    <SingleTask
+                    <SingleTaskTodo
+                      refetch={refetchTodoTask}
+                      refetchOnGoing={refetchOnGoing}
+                      id={todo._id}
+                      userId={todo.userId}
                       title={todo.title}
                       description={todo.description}
                       priority={todo.priority}
@@ -185,7 +191,7 @@ const TaskList = () => {
                   </div>)
 
               }
-            </div>} 
+            </div>}
       </TabPanel>
       <TabPanel>
         {
@@ -201,7 +207,11 @@ const TaskList = () => {
                 onGoingTask.map((todo) =>
                   <div key={todo._id} draggable onDragStart={(e) => handleDragStart(e, todo)}>
 
-                    <SingleTask
+                    <SingleTaskOnGoing
+                      refetch={refetchOnGoing}
+                      refetchCompleted={refetchCompeleted}
+                      id={todo._id}
+                      userId={todo.userId}
                       title={todo.title}
                       description={todo.description}
                       priority={todo.priority}
@@ -213,7 +223,7 @@ const TaskList = () => {
             </div>}
       </TabPanel>
       <TabPanel>
-         {
+        {
           !isCompletedFetching && !isCompletedLoading &&
             completedTask.length === 0 ?
             <div className='h-[70vh] flex items-center justify-center'>
@@ -226,7 +236,11 @@ const TaskList = () => {
                 completedTask.map((todo) =>
                   <div key={todo._id} draggable onDragStart={(e) => handleDragStart(e, todo)}>
 
-                    <SingleTask
+                    <SingleTaskCompleted
+                      refetch={refetchOnGoing}
+                      refetchCompleted={refetchCompeleted}
+                      id={todo._id}
+                      userId={todo.userId}
                       title={todo.title}
                       description={todo.description}
                       priority={todo.priority}
@@ -235,7 +249,7 @@ const TaskList = () => {
                   </div>)
 
               }
-            </div>} 
+            </div>}
       </TabPanel>
     </Tabs>
   );
