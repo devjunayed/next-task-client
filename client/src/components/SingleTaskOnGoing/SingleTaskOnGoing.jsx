@@ -18,7 +18,7 @@ const SingleTaskOnGoing = ({ refetch, refetchCompleted, userId, id, title, descr
 
 
     const handleDelete = (id) => {
-        publicAxios.delete(`/todo/${id}`)
+        publicAxios.delete(`/ongoing/${id}`)
             .then(res => {
                 if (res.data.deletedCount >= 1) {
                     Swal.fire({
