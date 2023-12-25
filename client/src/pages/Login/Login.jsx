@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from 'react-hook-form';
 import { useContext } from "react";
@@ -7,8 +7,9 @@ import Swal from "sweetalert2";
 
 const Login = () => {
     const {googleSignIn, emailSignIn} = useContext(AuthContext);
-    const from = "/";
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state.from.pathname || "/";
 
     const {
         register,

@@ -18,7 +18,7 @@ const TaskList = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
 
-  const { data: todoTask, refetch: refetchTodoTask, isFetching: isTodoTaskFetching, isLoading: isTodoTaskLoading } = useQuery({
+  const { data: todoTask = [], refetch: refetchTodoTask, isFetching: isTodoTaskFetching, isLoading: isTodoTaskLoading } = useQuery({
     queryKey: [userId, "todoTask", undefined],
     queryFn: async () => {
       const res = await publicAxios.get(`/todo/${userId}`);
@@ -27,7 +27,7 @@ const TaskList = () => {
   });
 
   // on going task
-  const { data: onGoingTask, refetch: refetchOnGoing, isFetching: isOnGoingFetching,
+  const { data: onGoingTask = [], refetch: refetchOnGoing, isFetching: isOnGoingFetching,
     isLoading: isOnGoingLoading } = useQuery({
       queryKey: [userId, "onGoingTask", undefined],
       queryFn: async () => {
@@ -37,7 +37,7 @@ const TaskList = () => {
     });
 
   // completed task
-  const { data: completedTask, refetch: refetchCompeleted, isCompletedFetching, isLoading: isCompletedLoading } = useQuery({
+  const { data: completedTask = [], refetch: refetchCompeleted, isCompletedFetching, isLoading: isCompletedLoading } = useQuery({
     queryKey: [userId, "completedTask", undefined],
     queryFn: async () => {
       const res = await publicAxios.get(`/completed/${userId}`);
