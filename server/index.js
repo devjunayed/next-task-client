@@ -5,7 +5,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 require("dotenv").config();
 
-app.use(cors());
+app.use(cors(
+  {
+    origin: ["https://devjunayed-next-task.web.app/"],
+  }
+));
 app.use(express.json());
 
 
