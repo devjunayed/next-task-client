@@ -39,11 +39,26 @@ async function run() {
         const result = await todoTask.insertOne(data);
         res.send(result);
     })
+    app.patch("/todo/:id", async(req, res) => {
+        const docId = req.params.id;
+        const filter = {_id: new ObjectId(docId)};
+        const data = req.body;
+        data._id = new ObjectId(data._id);
+        const result = await todoTask.updateOne(filter, {
+          $set: {
+            title: data.title,
+            description: data.description,
+            deadLine: data.deadLine,
+            priority: data.priority
+
+          }
+        }, {upsert: true});
+        res.send(result);
+    })
 
     app.get("/todo/:id", async(req, res) => {
       const userId = req.params.id;
       const result = await todoTask.find({userId}).toArray();
-      console.log(result);
       res.send(result);
     })
 
@@ -65,6 +80,23 @@ async function run() {
 
     })
 
+    app.patch("/ongoing/:id", async(req, res) => {
+      const docId = req.params.id;
+      const filter = {_id: new ObjectId(docId)};
+      const data = req.body;
+      data._id = new ObjectId(data._id);
+      const result = await onGoingTask.updateOne(filter, {
+        $set: {
+          title: data.title,
+          description: data.description,
+          deadLine: data.deadLine,
+          priority: data.priority
+
+        }
+      }, {upsert: true});
+      res.send(result);
+  })
+
     app.get("/ongoing/:id", async(req, res) => {
       const userId = req.params.id;
       const result = await onGoingTask.find({userId}).toArray();
@@ -84,6 +116,23 @@ async function run() {
       const result = await completedTask.insertOne(data);
       res.send(result);
     })
+
+    app.patch("/completed/:id", async(req, res) => {
+      const docId = req.params.id;
+      const filter = {_id: new ObjectId(docId)};
+      const data = req.body;
+      data._id = new ObjectId(data._id);
+      const result = await completedTask.updateOne(filter, {
+        $set: {
+          title: data.title,
+          description: data.description,
+          deadLine: data.deadLine,
+          priority: data.priority
+
+        }
+      }, {upsert: true});
+      res.send(result);
+  })
 
     app.get("/completed/:id", async(req, res) => {
       const userId = req.params.id;
