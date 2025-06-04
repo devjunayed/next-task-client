@@ -1,6 +1,11 @@
-import PropTypes from 'prop-types';
 
-const Benefit = ({icon, title, description}) => {
+type TBenefit = {
+    icon: React.ReactNode,
+    title: string,
+    description: string
+}
+
+const Benefit = ({icon, title, description}: TBenefit) => {
     return (
         <div className="space-y-3 font-montserrat flex flex-col items-center border p-6">
             <p className='text-3xl '>{icon}</p>
@@ -12,10 +17,5 @@ const Benefit = ({icon, title, description}) => {
 };
 
 
-Benefit.propTypes = {
-    icon: PropTypes.node,
-    title: PropTypes.string,
-    description: PropTypes.string,
-}
 
 export default Benefit;

@@ -1,6 +1,11 @@
-import PropTypes from 'prop-types';
 
-const Feature = ({icon, title, description}) => {
+type TFeature = {
+    icon: React.ReactNode,
+    title: string,
+    description: string
+}
+
+const Feature = ({icon, title, description}: TFeature) => {
     return (
         <div className='border p-4 space-y-2 shadow-lg'>
             <p className='text-3xl text-gray-500'>{icon}</p>
@@ -10,10 +15,6 @@ const Feature = ({icon, title, description}) => {
     );
 };
 
-Feature.propTypes = {
-    icon: PropTypes.node,
-    title: PropTypes.string,
-    description: PropTypes.string,
-}
+
 
 export default Feature;

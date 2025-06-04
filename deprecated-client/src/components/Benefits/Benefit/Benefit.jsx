@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 const Benefit = ({icon, title, description}) => {
     return (
